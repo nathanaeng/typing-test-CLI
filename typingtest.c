@@ -5,11 +5,11 @@
 #include <time.h>
 #include <sys/time.h>
 
-#define GET_TIME(__TIME_now) {							\
+#define GET_TIME(__TIME_now) {		              					\
     struct timeval t;									\
     gettimeofday(&t, NULL);								\
-    __TIME_now = (double)(t.tv_sec + (t.tv_usec/1e6));	\
-    }													\
+    __TIME_now = (double)(t.tv_sec + (t.tv_usec/1e6));	                                \
+    }										        \
 
 /* WORD LIST */
 char* words[] = {"a", "at", "an", "any", "another", "ask", "as", "art", "aid", "and", "also", "application", "ancient", "ant",
@@ -41,7 +41,7 @@ char* words[] = {"a", "at", "an", "any", "another", "ask", "as", "art", "aid", "
 
 #define WORDS_SIZE (long)(sizeof words/sizeof(words[0]))
 
-// generate the paragraph of words in the typing test
+// Generate the paragraph of words in the typing test
 char** createParagraph(int N) {
 	char** paragraph = (char**)malloc(N*sizeof(words[0])); // store words list for later comparison
 	int limit = 40, used = 0;				// max number of characters per line (visual)
@@ -70,8 +70,8 @@ char** createParagraph(int N) {
 	return paragraph;
 }
 
-// get user input as an array of characters, convert it to an array of strings and return
-// also updates timestamps for start and end of the typing test
+// Get user input as an array of characters, convert it to an array of strings and return
+// Also updates timestamps for start and end of the typing test
 char** getInput(int N, char** paragraph, double* start, double* end) {
 	char c;
 	char chars[500];	// random large value
