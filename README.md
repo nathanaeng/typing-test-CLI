@@ -3,6 +3,8 @@ See the newest version, implemented in JavaScript and HTML/CSS [here](https://gi
 
 Over the summer, I made it my goal to learn how to type faster. There are lots of great websites out there (like [10fastfingers](https://10fastfingers.com/), [typingtest.com](https://www.typingtest.com/), and [typings.gg](https://typings.gg/)), but I figured I might as well practice coding at the same time - so I implemented a typing test in C! Find out how many words per minute you can type!
 
+<a href="#">![](img/terminal.jpg)</a>
+
 ----
 
 VERSIONS:
