@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "USAGE: %s\n", argv[0]);
 		return EXIT_FAILURE;
 	}
-	printf("\n"); printf("\n"); printf("\n");	// visual
+	printf("\n\n\n");							// visual
 
 	/* CREATE AND PRINT PARAGRAPH */
 	int N = 10;								// number of words in test
@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 	printf("\n");		// visual
 
 	/* USER INPUT */
-	char c;
+	int c;
 	char c_arr[500];	// random large value
 	int space_ctr=0, pos=0;
 	struct timeval t1, t2;
@@ -104,11 +104,9 @@ int main(int argc, char **argv) {
 	char last_temp[100];			// stores the user's last word for comparison
 	int j=0;						// index for user's last word
 
-	system("stty raw");		// set terminal to raw mode for live char input
-
 	while(space_ctr<N) {
 		c=getchar();
-		if(c!='\0' && c!=0x7F && first) {	// start time after first input
+		if(c!=EOF && c!='\b' && first) {	// start time after first input
 			(void)gettimeofday(&t1, NULL);
 			first=false;
 		}
@@ -118,11 +116,10 @@ int main(int argc, char **argv) {
 		}
 		else if(pos >= 0)
 			c_arr[pos]=c;
-		if(c==0x7F) {	// 0x7F = backspace key
-			printf("\b \b");		// backspace implementation
-			printf("\b \b");		// backspace implementation
+		if(c=='\b') {	// 0x7F = backspace key
+			printf("\b");		// backspace implementation
 			if(pos > 0) {
-				printf("\b \b");		// backspace implementation
+				printf("\b");		// backspace implementation
 				pos--;
 				if(c_arr[pos]==' ')
 					space_ctr-=1;
@@ -133,7 +130,7 @@ int main(int argc, char **argv) {
 			pos++;
 		
 		if(space_ctr+1==N) {		// get last word
-			if(c!=' ' && c!=0x7F)
+			if(c!=' ' && c!='\b')
 				last_temp[j++]=c;
 			if(j==(int)(strlen(last)-1)) {
 				last_temp[j]=' ';			// append space (as test ends with space by default)
@@ -150,8 +147,7 @@ int main(int argc, char **argv) {
 	(void)gettimeofday(&t2, NULL);		// terminate time after last space
 	msecs = 1000000*(t2.tv_sec-t1.tv_sec)+(t2.tv_usec-t1.tv_usec);	// milliseconds conversion
 	float secs = (float)msecs/1000000;		// seconds conversion
-	system("stty cooked");		// back to default terminal mode
-	printf("\n"); printf("\n"); printf("\n");		// visual
+	printf("\n\n\n");		// visual
 
 	// convert to array of strings
 	int begin_index=0, end_index, index=0;
@@ -181,9 +177,7 @@ int main(int argc, char **argv) {
 	float accuracy=((float)score/(float)N)*100;
 	float wpm=(score/secs) * 60;
 
-	printf("\%% correct: %f\n", accuracy);
-	printf("WPM: %f\n", wpm);
-	printf("\n");
+	printf("\%% correct: %.2f\nWPM: %.2f\n\n", accuracy, wpm);
 
 	return EXIT_SUCCESS;
 }
